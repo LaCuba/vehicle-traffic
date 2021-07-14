@@ -1,0 +1,35 @@
+.window {
+  width: 70%;
+  max-width: 784px;
+  margin: 50px auto;
+  border-radius: 10px;
+
+  background-color: #e4e4e4;
+  padding: 20px;
+}
+
+.body {
+  width: 744px;
+  box-sizing: border-box;
+  border: solid 2px #fff;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 210px 170px 80px 80px 120px 60px;
+  justify-items: center;
+}
+
+.title {
+  width: 100%;
+  border: solid 1px #fff;
+
+  h2 {
+    padding: 5px 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+  }
+}

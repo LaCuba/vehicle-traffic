@@ -1,0 +1,18 @@
+.item {
+  display: grid;
+  grid-template-columns: 210px 170px 80px 80px 120px 60px;
+  justify-items: center;
+}
+
+.column {
+  width: 100%;
+  padding: 5px 0;
+
+  border: solid 1px #fff;
+  text-align: center;
+
+  h3 {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
