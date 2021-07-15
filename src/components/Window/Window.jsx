@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux"
 import { Item } from "../Item/Item"
 import styles from "./Window.module.scss"
 
 export const Window = () => {
+  const items = useSelector((state) => state.window.items)
+
   return (
     <div className={styles.window}>
       <div className={styles.body}>
@@ -25,14 +28,20 @@ export const Window = () => {
             <h2>Speed</h2>
           </div>
         </header>
-        <Item
-          diviceId={"00.00-0000-0000000"}
-          timestamp={213412342134241}
-          color={"black"}
-          classAuto={"car"}
-          plate={"A777AA777"}
-          speed={120}
-        />
+        <div className={styles.items}>
+          {items.map((item) => {
+            return (
+              <Item
+                diviceId={item.diviceId}
+                timestamp={item.timestamp}
+                color={item.color}
+                classAuto={item.class}
+                plate={item.plate}
+                speed={item.speed}
+              />
+            )
+          })}
+        </div>
       </div>
     </div>
   )

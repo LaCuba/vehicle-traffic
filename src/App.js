@@ -1,9 +1,9 @@
-import "./App.scss"
+import styles from "./App.module.scss"
 import { Window } from "./components/Window/Window"
 
 const App = () => {
   return (
-    <div className="App">
+    <div className={styles.app}>
       <Window />
     </div>
   )
