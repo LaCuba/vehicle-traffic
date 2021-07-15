@@ -1,1 +1,4 @@
-export const setItems = (items) => ({ type: "window/SET-ITEMS", items })
+export const setMessages = (messages) => ({
+  type: "window/SET-MESSAGES",
+  messages,
+})

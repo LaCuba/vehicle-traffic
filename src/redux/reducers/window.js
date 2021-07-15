@@ -1,33 +1,41 @@
-import { setItems } from "../actions/window"
+import { api } from "../../api/api"
+import { setMessages } from "../actions/window"
 
 const initialState = {
-  items: [
-    {
-      diviceId: "00.00-0000-0000000",
-      timestamp: 213412342134241,
-      color: "black",
-      class: "car",
-      plate: "A777AA777",
-      speed: 120,
-    },
-  ],
+  messages: [],
 }
 
-const windowReducer = (state = initialState, action) => {
+const messageWindowReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "window/SET-ITEMS":
+    case "window/SET-MESSAGES":
       return {
         ...state,
-        items: [...state.items, ...action.items],
+        messages: [...state.messages, ...action.messages],
       }
     default:
       return state
   }
 }
 
-export const startItemsListening = (items) => async (dispatch) => {
-  // items -> ws
-  dispatch(setItems(items))
+let _newMessageHandler = null
+
+const newMessageHandlerCreator = (dispatch) => {
+  if (_newMessageHandler === null) {
+    _newMessageHandler = (messages) => {
+      dispatch(setMessages(messages))
+    }
+  }
+  return _newMessageHandler
 }
 
-export default windowReducer
+export const startMessageListening = () => (dispatch) => {
+  api.subscribe(newMessageHandlerCreator(dispatch))
+  api.start()
+}
+
+export const stopMessageListening = () => (dispatch) => {
+  api.unsubscribe(newMessageHandlerCreator(dispatch))
+  api.stop()
+}
+
+export default messageWindowReducer

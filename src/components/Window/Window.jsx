@@ -1,9 +1,15 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import {
+  startMessageListening,
+  stopMessageListening,
+} from "../../redux/reducers/window"
 import { Item } from "../Item/Item"
 import styles from "./Window.module.scss"
 
 export const Window = () => {
-  const items = useSelector((state) => state.window.items)
+  const items = useSelector((state) => state.messageWindow.messages)
+
+  const dispatch = useDispatch()
 
   return (
     <div className={styles.window}>
@@ -32,7 +38,8 @@ export const Window = () => {
           {items.map((item) => {
             return (
               <Item
-                diviceId={item.diviceId}
+                key={item.deviceId}
+                diviceId={item.deviceId}
                 timestamp={item.timestamp}
                 color={item.color}
                 classAuto={item.class}
@@ -42,6 +49,22 @@ export const Window = () => {
             )
           })}
         </div>
+        <button
+          className={styles.start}
+          onClick={() => {
+            dispatch(startMessageListening())
+          }}
+        >
+          Start updates
+        </button>
+        <button
+          className={styles.stop}
+          onClick={() => {
+            dispatch(stopMessageListening())
+          }}
+        >
+          Stop updates
+        </button>
       </div>
     </div>
   )

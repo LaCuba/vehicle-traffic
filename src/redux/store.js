@@ -1,9 +1,9 @@
 import { createStore, combineReducers, applyMiddleware } from "redux"
 import thunkCreator from "redux-thunk"
-import window from "./reducers/window"
+import messageWindowReducer from "./reducers/window"
 
 const reducers = combineReducers({
-  window: window,
+  messageWindow: messageWindowReducer,
 })
 
 const store = createStore(reducers, applyMiddleware(thunkCreator))
