@@ -51,7 +51,7 @@ export default class WS {
     clearInterval(this.intervalId)
     this.intervalId = setInterval(() => {
       this._trigger("message", rangeFill(this.vehicleCount, createVehicle))
-    }, 3000)
+    }, 1500)
   }
 
   _trigger(eventName, ...args) {
@@ -68,11 +68,5 @@ export default class WS {
     this.handlers[eventName] = this.handlers[eventName].filter(
       (handler) => handler !== handlerToRemove
     )
-  }
-
-  send(type, msg) {
-    if (type === "updateVehicleCount") {
-      this.vehicleCount = Math.max(msg.count, 0)
-    }
   }
 }

@@ -22,7 +22,6 @@ export const api = {
     ws.removeEventListener("message", messageHandler)
   },
   subscribe(callback) {
-    debugger
     subscribers.push(callback)
   },
   unsubscribe(callback) {

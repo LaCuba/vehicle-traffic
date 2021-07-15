@@ -1,41 +1,28 @@
-import { api } from "../../api/api"
-import { setMessages } from "../actions/window"
-
 const initialState = {
   messages: [],
+  messagesCount: 50,
 }
 
 const messageWindowReducer = (state = initialState, action) => {
   switch (action.type) {
     case "window/SET-MESSAGES":
+      let newState = { ...state, messages: [...state.messages] }
+      if (state.messages.length >= state.messagesCount) {
+        newState.messages.shift()
+        newState = { ...state, messages: [...newState.messages] }
+      }
+      return {
+        ...newState,
+        messages: [...newState.messages, ...action.messages],
+      }
+    case "window/SET-COUNT-MESSAGES":
       return {
         ...state,
-        messages: [...state.messages, ...action.messages],
+        messagesCount: action.count,
       }
     default:
       return state
   }
-}
-
-let _newMessageHandler = null
-
-const newMessageHandlerCreator = (dispatch) => {
-  if (_newMessageHandler === null) {
-    _newMessageHandler = (messages) => {
-      dispatch(setMessages(messages))
-    }
-  }
-  return _newMessageHandler
-}
-
-export const startMessageListening = () => (dispatch) => {
-  api.subscribe(newMessageHandlerCreator(dispatch))
-  api.start()
-}
-
-export const stopMessageListening = () => (dispatch) => {
-  api.unsubscribe(newMessageHandlerCreator(dispatch))
-  api.stop()
 }
 
 export default messageWindowReducer

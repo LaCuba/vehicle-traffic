@@ -1,10 +1,10 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { Item } from "../Item/Item"
 import { Sidebar } from "./Sidebar/Sidebar"
 import styles from "./Window.module.scss"
 
 export const Window = () => {
-  const items = useSelector((state) => state.messageWindow.messages)
+  const items = useSelector((state) => state.messagesWindow.messages)
 
   return (
     <div className={styles.window}>

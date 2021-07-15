@@ -3,7 +3,7 @@ import thunkCreator from "redux-thunk"
 import messageWindowReducer from "./reducers/window"
 
 const reducers = combineReducers({
-  messageWindow: messageWindowReducer,
+  messagesWindow: messageWindowReducer,
 })
 
 const store = createStore(reducers, applyMiddleware(thunkCreator))
